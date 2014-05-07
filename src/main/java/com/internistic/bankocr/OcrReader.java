@@ -84,7 +84,8 @@ public class OcrReader {
 	 * 
 	 * @return An account number string - should be numeric, but may include
 	 *         illegible characters if the OCR characters cannot be parsed
-	 *         correctly.
+	 *         correctly. Will return null if there are no more account numbers
+	 *         to be read.
 	 * @throws IOException
 	 * @see ILLEGIBLE_OCR_DIGIT
 	 */
@@ -156,8 +157,9 @@ public class OcrReader {
 	}
 
 	/**
-	 * Take a list of (1x9) OCR characters strings and attempt to convert them
-	 * into an account number string.
+	 * Take a list of (1x9) OCR character strings and attempt to convert them
+	 * into an account number string. Illegible OCR characters are returned as
+	 * an "illegible" flag character, nominally '?'
 	 * 
 	 * @param ocrDigits
 	 * @return An account number string - should be numeric, but may include

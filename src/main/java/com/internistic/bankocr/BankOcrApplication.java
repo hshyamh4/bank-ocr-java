@@ -7,6 +7,12 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Application class for Bank OCR Kata Java implementation.
+ * 
+ * @author pumbers
+ * 
+ */
 public class BankOcrApplication {
 
 	private static final Logger log = LoggerFactory
@@ -19,14 +25,14 @@ public class BankOcrApplication {
 		} else if (args.length == 2) {
 			new BankOcrApplication().run(args[0], args[1]);
 		} else {
-			System.out
-					.println("Usage:\tBankOcrApplication <input file> [output file]\n\n\tIf output file is not specified, results will be printed to the console.");
+			log.error("Usage:\tBankOcrApplication <input file> [output file]\n\n\tIf output file is not specified, results will be printed to the console.");
 		}
 
 	}
 
 	private void run(final String accountsFileName, String resultsFileName)
 			throws IOException {
+
 		log.info("Starting OCR run ...");
 		log.info("Reading account OCR data from {}", accountsFileName);
 
@@ -34,17 +40,18 @@ public class BankOcrApplication {
 
 			OcrReader reader = new OcrReader(new File(accountsFileName));
 
-			ResultsWriter writer = null;
+			AccountWriter writer = null;
 			if (resultsFileName != null && !resultsFileName.isEmpty()) {
 				log.info("Writing account details to {}", resultsFileName);
-				writer = new ResultsWriter(resultsFileName);
+				writer = new AccountWriter(resultsFileName);
 			} else {
 				log.info("Writing account details to STDOUT");
-				writer = new ResultsWriter(System.out);
+				writer = new AccountWriter();
 			}
 
-			while (reader.isReady()) {
-				Account account = new Account(reader.getNextAccountNumber());
+			Account account;
+			while (reader.isReady()
+					&& (account = new Account(reader.getNextAccountNumber())) != null) {
 				writer.write(account);
 			}
 
@@ -55,8 +62,7 @@ public class BankOcrApplication {
 					"OCR run aborted: The file '{}' could not be found.  Please try a different file name.",
 					accountsFileName);
 		} catch (Exception e) {
-			log.error("OCR run aborted: Error reading from file '{}'",
-					accountsFileName, e);
+			log.error("OCR run aborted", e);
 		}
 
 	}
