@@ -25,7 +25,7 @@ public class AccountWriter {
 	 * @param resultsFileName
 	 * @throws IOException
 	 */
-	public AccountWriter(String resultsFileName) throws IOException {
+	public AccountWriter(final String resultsFileName) throws IOException {
 		this(new PrintStream(resultsFileName));
 	}
 
@@ -34,7 +34,7 @@ public class AccountWriter {
 	 * 
 	 * @param out
 	 */
-	public AccountWriter(PrintStream out) {
+	public AccountWriter(final PrintStream out) {
 		this.out = out;
 	}
 
@@ -51,7 +51,7 @@ public class AccountWriter {
 	 * 
 	 * @param account
 	 */
-	public void write(Account account) {
+	public void write(final Account account) {
 		log.debug("write(): account={}", account);
 		out.println(String.format("%s %s", account.getAccountNumber(),
 				account.hasError() ? account.getError() : ""));

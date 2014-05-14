@@ -62,7 +62,7 @@ public class OcrReader {
 	 * @throws FileNotFoundException
 	 *             If the specified file does not exist
 	 */
-	public OcrReader(File inputFile) throws FileNotFoundException {
+	public OcrReader(final File inputFile) throws FileNotFoundException {
 		this.reader = new BufferedReader(new FileReader(inputFile));
 	}
 
@@ -74,7 +74,7 @@ public class OcrReader {
 	 *            OCR lines - each line should terminate with a lf (\n) or cr/lf
 	 *            (\r\n).
 	 */
-	public OcrReader(String lines) {
+	public OcrReader(final String lines) {
 		this.reader = new BufferedReader(new StringReader(lines));
 	}
 
@@ -166,7 +166,7 @@ public class OcrReader {
 	 *         illegible characters if the OCR characters cannot be parsed
 	 *         correctly.
 	 */
-	String parseOcrDigits(List<String> ocrDigits) {
+	String parseOcrDigits(final List<String> ocrDigits) {
 		log.debug("parseOcrDigits(): ocrDigits={}", ocrDigits);
 
 		if (ocrDigits == null || ocrDigits.isEmpty()) {

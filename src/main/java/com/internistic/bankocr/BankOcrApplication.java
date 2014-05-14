@@ -30,7 +30,7 @@ public class BankOcrApplication {
 
 	}
 
-	private void run(final String accountsFileName, String resultsFileName)
+	private void run(final String accountsFileName, final String resultsFileName)
 			throws IOException {
 
 		log.info("Starting OCR run ...");

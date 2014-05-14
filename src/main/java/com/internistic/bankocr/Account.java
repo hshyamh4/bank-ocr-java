@@ -45,7 +45,7 @@ public class Account {
 	 * @param accountNumber
 	 *            Must be non-null, 9-digits or illegible character flags
 	 */
-	public Account(String accountNumber) {
+	public Account(final String accountNumber) {
 		if (accountNumber == null) {
 			throw new IllegalArgumentException("Account number cannot be null");
 		} else if (!accountNumber.matches(ALLOWED_ACCOUNT_NUMBER_REGEX)) {
@@ -92,7 +92,7 @@ public class Account {
 	 * @return Error enum, or null if the account number & checksum its are
 	 *         valid
 	 */
-	public static final ERROR validate(String accountNumber) {
+	public static final ERROR validate(final String accountNumber) {
 		return validate(accountNumber, checksumFor(accountNumber));
 	}
 
@@ -106,7 +106,7 @@ public class Account {
 	 * @return Error enum, or null if both the account number & checksum are
 	 *         valid
 	 */
-	private static final ERROR validate(String accountNumber, Integer checksum) {
+	private static final ERROR validate(final String accountNumber, final Integer checksum) {
 
 		if (accountNumber == null
 				|| !accountNumber.matches(VALID_ACCOUNT_NUMBER_REGEX)) {
